@@ -11,8 +11,14 @@ const [query, setQuery] = useState('')
 const [page, setPage] = useState(1)
 const [totalPages, setTotalPages] = useState(1)
 const [isSearching, setIsSearching] = useState(false)
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+const BASE_URL = 'https://api.themoviedb.org/3';
 
 
+
+axios.get(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}`)
+  .then(res => setMovies(res.data.results))
+  .catch(err => console.error(err));
 useEffect(() => { loadTrending(page) }, [page])
 
 
